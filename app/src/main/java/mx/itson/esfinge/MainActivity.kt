@@ -65,32 +65,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         })
     }
 
-    fun obtenerVisita(visitaId: Int) {
-        val call: Call<Visita> = RetrofitUtil.getApi()!!.getVisita(visitaId)
-        call.enqueue(object : Callback<Visita> {
-            override fun onResponse(call: Call<Visita>, response: Response<Visita>) {
-                if (response.isSuccessful) {
-                    val visita: Visita? = response.body()
-                    if (visita != null) {
-                        val intent = Intent(this@MainActivity, ListVisitaActivity::class.java)
-                        intent.putExtra("visitaId", visita.id)
-                        intent.putExtra("visitaLugar", visita.lugar)
-                        intent.putExtra("visitaMotivo", visita.motivo)
-                        intent.putExtra("visitaResponsable", visita.responsable)
-                        intent.putExtra("visitaLatitud", visita.latitud)
-                        intent.putExtra("visitaLongitud", visita.longitud)
-                        startActivity(intent)
-                    }
-                } else {
-                    Log.e("Error al respuesta visita", response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<Visita>, t: Throwable) {
-                Log.e("Error al obtener visita", t.toString())
-            }
-        })
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
@@ -104,8 +78,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val visitaId = marker.tag as? Int
-        visitaId?.let {
-            obtenerVisita(it)
+        if (visitaId != null) {
+            val intent = Intent(this@MainActivity, ListVisitaActivity::class.java)
+            intent.putExtra("visitaId", visitaId)
+            startActivity(intent)
+
+            return true
         }
         return false
     }

@@ -100,12 +100,6 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
 
                 lat = marker.position.latitude
                 lon = marker.position.longitude
-
-                Toast.makeText(
-                    this@FormVisitaActivity,
-                    "Latitud: " + marker.position.latitude + "\n" + "Longitud: " + marker.position.longitude,
-                    Toast.LENGTH_LONG
-                ).show()
             }
         })
     }

@@ -2,6 +2,7 @@ package mx.itson.esfinge
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,11 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
         mapaFragment!!.getMapAsync(this)
 
         obtenerVisita(visitaId!!)
+
+        val btnCerrar = findViewById<Button>(R.id.btnCerrar)
+        btnCerrar.setOnClickListener {
+            finish()
+        }
     }
 
     fun obtenerVisita(visitaId: Int) {

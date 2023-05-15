@@ -3,7 +3,9 @@ package mx.itson.esfinge
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     Log.e("Error al obtener visitas", response.message())
                 }
             }
+
             override fun onFailure(call: Call<List<Visita>>, t: Throwable) {
                 Log.e("Error al obtener visitas", t.toString())
             }
@@ -79,10 +82,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(marker: Marker): Boolean {
         val visitaId = marker.tag as? Int
         if (visitaId != null) {
+            Toast.makeText(this, "Cargando datos...", Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, ListVisitaActivity::class.java)
             intent.putExtra("visitaId", visitaId)
             startActivity(intent)
-
             return true
         }
         return false

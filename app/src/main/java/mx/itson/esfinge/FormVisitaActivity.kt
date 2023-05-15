@@ -80,9 +80,11 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
+            // Inicializar mapa
             mapa = googleMap
             mapa!!.mapType = GoogleMap.MAP_TYPE_HYBRID
 
+            // Verificar permisos
             val estaPermitido = ActivityCompat.checkSelfPermission(
                 this, ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
@@ -94,6 +96,7 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
                 )
             }
 
+            // Obtener ubicacion
             val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
             val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             if (location != null) {
@@ -109,9 +112,11 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
 
     override fun onLocationChanged(location: Location) {
 
+        // Obtener ubicacion
         val latitud = location.latitude
         val longitud = location.longitude
 
+        // Agregar marcador
         val latLng = LatLng(latitud, longitud)
         mapa?.clear()
         mapa?.addMarker(MarkerOptions().position(latLng).draggable(true).title("Mi ubicación"))
@@ -139,16 +144,20 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
         when (btn.id) {
             R.id.btnGuardar -> {
                 try {
+                    // Obtener datos
                     val lugar = findViewById<EditText>(R.id.etLugar)
                     val motivo = findViewById<EditText>(R.id.etMotivo)
                     val responsable = findViewById<EditText>(R.id.etResponsable)
 
+                    // Guardar datos de visita
                     textoLugar = lugar.text.toString()
                     textoMotivo = motivo.text.toString()
                     textoResponsable = responsable.text.toString()
 
+                    // Validar datos
                     val visita = Visita(textoLugar, textoMotivo, textoResponsable, lat, lon)
 
+                    // Guardar visita
                     val call: Call<Visita> = RetrofitUtil.getApi()!!.createVisita(visita)
                     call.enqueue(object : Callback<Visita> {
                         override fun onResponse(

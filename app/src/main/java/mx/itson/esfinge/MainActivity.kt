@@ -40,13 +40,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val mapaFragment = supportFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment?
         mapaFragment!!.getMapAsync(this)
 
-        obtenerMarcadores()
-
         val btnAgregarMarcador = findViewById<FloatingActionButton>(R.id.btnAgregarMarcador)
         btnAgregarMarcador.setOnClickListener {
             val intent = Intent(this, FormVisitaActivity::class.java)
             startActivity(intent)
         }
+        obtenerMarcadores()
     }
 
     /**
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
      *
      */
     private fun obtenerMarcadores() {
+        // Obtener todas las visitas
         val call: Call<List<Visita>>? = RetrofitUtil.getApi()?.getVisitas()
         call?.enqueue(object : Callback<List<Visita>> {
             override fun onResponse(call: Call<List<Visita>>, response: Response<List<Visita>>) {
@@ -61,12 +61,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     val visitas: List<Visita>? = response.body()
                     visitas?.let {
                         mapa?.clear()
+                        // Agregar marcadores al mapa
                         for (v in it) {
                             val latLng = LatLng(v.latitud ?: 0.0, v.longitud ?: 0.0)
                             val marker = mapa?.addMarker(
                                 MarkerOptions().position(latLng)
                                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_cheems))
                             )
+                            // Asignar el id de la visita al marcador
                             marker?.tag = v.id
                         }
                     }
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
     override fun onMapReady(googleMap: GoogleMap) {
+        // Trata de asignar el mapa de google
         try {
             mapa = googleMap
             mapa!!.mapType = GoogleMap.MAP_TYPE_HYBRID
@@ -93,6 +96,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+        // Obtener el id de la visita del marcador
         val visitaId = marker.tag as? Int
         if (visitaId != null) {
             Toast.makeText(this, "Cargando datos...", Toast.LENGTH_SHORT).show()

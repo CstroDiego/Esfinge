@@ -54,13 +54,13 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapaFragment =
             supportFragmentManager.findFragmentById(R.id.ubicacion) as SupportMapFragment?
         mapaFragment!!.getMapAsync(this)
-
-        obtenerVisita(visitaId!!)
-
         val btnCerrar = findViewById<Button>(R.id.btnCerrar)
         btnCerrar.setOnClickListener {
             finish()
         }
+
+        // Obtener la visita de la base de datos
+        obtenerVisita(visitaId!!)
     }
 
     /**
@@ -75,17 +75,17 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (response.isSuccessful) {
                     val visita: Visita? = response.body()
                     if (visita != null) {
+                        // Actualizar los campos de texto
                         val txtLugar = findViewById<TextView>(R.id.txtLugar)
                         val txtMotivo = findViewById<TextView>(R.id.txtMotivo)
                         val txtResponsable = findViewById<TextView>(R.id.txtResponsable)
-
                         txtLugar.text = visita.lugar.toString()
                         txtMotivo.text = visita.motivo.toString()
                         txtResponsable.text = visita.responsable.toString()
 
+                        // Actualizar la ubicación en el mapa
                         visitaLat = visita.latitud.toString().toDouble()
                         visitaLon = visita.longitud.toString().toDouble()
-
                         actualizarMapa()
                     }
                 } else {
@@ -101,6 +101,7 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
+            // Inicializar el mapa
             mapa = googleMap
             mapa!!.mapType = GoogleMap.MAP_TYPE_HYBRID
         } catch (ex: Exception) {
@@ -113,9 +114,11 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
      *
      */
     private fun actualizarMapa() {
+        // Verificar que la visita tenga ubicación
         if (visitaLat != null && visitaLon != null) {
             val visitaLatLng = LatLng(visitaLat!!, visitaLon!!)
 
+            // Actualizar el mapa
             mapa?.clear()
             mapa?.addMarker(
                 MarkerOptions().position(visitaLatLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_cheems))

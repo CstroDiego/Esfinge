@@ -26,14 +26,44 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Actividad para el formulario de visita
+ *
+ * @constructor Crear un formulario de visita
+ *
+ * @author Diego Castro Arce
+ */
 class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     View.OnClickListener {
 
+    /**
+     * Mapa de google
+     */
     private var mapa: GoogleMap? = null
+
+    /**
+     * Latitud de la visita
+     */
     private var lat: Double? = null
+
+    /**
+     * Longitud de la visita
+     */
     private var lon: Double? = null
+
+    /**
+     * Lugar de la visita
+     */
     private var textoLugar: String? = null
+
+    /**
+     * Motivo de la visita
+     */
     private var textoMotivo: String? = null
+
+    /**
+     * Responsable de la visita
+     */
     private var textoResponsable: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,11 +119,11 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
         mapa?.animateCamera(CameraUpdateFactory.zoomTo(15f))
         mapa?.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
             override fun onMarkerDragStart(marker: Marker) {
-                val a = 1 + 1
+                1 + 1
             }
 
             override fun onMarkerDrag(marker: Marker) {
-                val a = 1 + 1
+               1 + 1
             }
 
             override fun onMarkerDragEnd(marker: Marker) {

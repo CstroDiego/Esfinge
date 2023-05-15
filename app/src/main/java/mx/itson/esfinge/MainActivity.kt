@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -20,8 +19,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Actividad principal de la aplicación
+ *
+ * @constructor Crear la actividad principal
+ *
+ * @author Diego Castro Arce
+ */
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    /**
+     * Mapa de google
+     */
     var mapa: GoogleMap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +49,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
-    fun obtenerMarcadores() {
+    /**
+     * Obtiene todos los registros de visitas de la base de datos y los muestra en el mapa
+     *
+     */
+    private fun obtenerMarcadores() {
         val call: Call<List<Visita>>? = RetrofitUtil.getApi()?.getVisitas()
         call?.enqueue(object : Callback<List<Visita>> {
             override fun onResponse(call: Call<List<Visita>>, response: Response<List<Visita>>) {

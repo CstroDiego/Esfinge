@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,10 +17,33 @@ import mx.itson.esfinge.utilerias.RetrofitUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+/**
+ * Muestra los detalles de una visita
+ *
+ * @constructor Crea una nueva instancia de la actividad
+ *
+ * @author Diego Castro Arce
+ */
 class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
-    var mapa: GoogleMap? = null
+    /**
+     * Mapa de google
+     */
+    private var mapa: GoogleMap? = null
+
+    /**
+     * Id de la visita en la base de datos
+     */
     private var visitaId: Int? = null
+
+    /**
+     * Latitud de la visita
+     */
     private var visitaLat: Double? = null
+
+    /**
+     * Longitud de la visita
+     */
     private var visitaLon: Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +63,12 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    fun obtenerVisita(visitaId: Int) {
+    /**
+     * Obtiene una visita de la base de datos por su id
+     *
+     * @param visitaId Id de la visita
+     */
+    private fun obtenerVisita(visitaId: Int) {
         val call: Call<Visita> = RetrofitUtil.getApi()!!.getVisita(visitaId)
         call.enqueue(object : Callback<Visita> {
             override fun onResponse(call: Call<Visita>, response: Response<Visita>) {
@@ -81,6 +108,10 @@ class ListVisitaActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Actualiza el mapa con la ubicación de la visita
+     *
+     */
     private fun actualizarMapa() {
         if (visitaLat != null && visitaLon != null) {
             val visitaLatLng = LatLng(visitaLat!!, visitaLon!!)

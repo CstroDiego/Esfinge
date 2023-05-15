@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface CheemsAPI {
 
@@ -13,5 +14,8 @@ interface CheemsAPI {
 
     @POST("visitas")
     fun createVisita(@Body visita: Visita): Call<Visita>
+
+    @GET("visitas/{id}")
+    fun getVisita(@Path("id") visitaId: Int): Call<Visita>
 
 }

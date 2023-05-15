@@ -26,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class VisitaFormActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
+class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     View.OnClickListener {
 
     private var mapa: GoogleMap? = null
@@ -38,7 +38,7 @@ class VisitaFormActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_visita_form)
+        setContentView(R.layout.activity_form_visita)
 
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapaMarker) as SupportMapFragment
@@ -102,7 +102,7 @@ class VisitaFormActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
                 lon = marker.position.longitude
 
                 Toast.makeText(
-                    this@VisitaFormActivity,
+                    this@FormVisitaActivity,
                     "Latitud: " + marker.position.latitude + "\n" + "Longitud: " + marker.position.longitude,
                     Toast.LENGTH_LONG
                 ).show()
@@ -133,14 +133,14 @@ class VisitaFormActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
                         ) {
                             if (response.isSuccessful) {
                                 Toast.makeText(
-                                    this@VisitaFormActivity,
+                                    this@FormVisitaActivity,
                                     "Visita guardada",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 finish()
                             } else {
                                 Toast.makeText(
-                                    this@VisitaFormActivity,
+                                    this@FormVisitaActivity,
                                     "Error al guardar la visita",
                                     Toast.LENGTH_LONG
                                 ).show()

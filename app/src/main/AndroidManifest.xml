@@ -18,7 +18,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".VisitaFormActivity"
+            android:name=".ListVisitaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FormVisitaActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

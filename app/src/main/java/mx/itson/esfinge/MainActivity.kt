@@ -1,15 +1,18 @@
 package mx.itson.esfinge
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import retrofit2.Call
 import android.util.Log
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.itson.esfinge.entidades.Visita
 import mx.itson.esfinge.utilerias.RetrofitUtil
 import retrofit2.Callback
@@ -28,6 +31,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback{
 
         obtenerVisitas()
 
+
+        val btnAgregarMarcador = findViewById<FloatingActionButton>(R.id.btnAgregarMarcador)
+        btnAgregarMarcador.setOnClickListener {
+            val intent = Intent(this, VisitaFormActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
@@ -61,5 +70,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback{
                 Log.e("Error al obtener visitas", t.toString())
             }
         })
+    }
+    override fun onResume() {
+        super.onResume()
+        obtenerVisitas()
     }
 }

@@ -167,14 +167,14 @@ class FormVisitaActivity : AppCompatActivity(), OnMapReadyCallback, LocationList
                             if (response.isSuccessful) {
                                 Toast.makeText(
                                     this@FormVisitaActivity,
-                                    "Visita guardada",
+                                    getString(R.string.texto_visita_guardada),
                                     Toast.LENGTH_LONG
                                 ).show()
                                 finish()
                             } else {
                                 Toast.makeText(
                                     this@FormVisitaActivity,
-                                    "Error al guardar la visita",
+                                    getString(R.string.texto_error_al_guardar_la_visita),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }

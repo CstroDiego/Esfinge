@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Esfinge</string>
     <string name="a_adir_nuevo_marcador">Añadir nuevo marcador</string>
+    <string name="texto_lugar">Lugar</string>
+    <string name="texto_motivo">Motivo</string>
+    <string name="texto_responsable">Responsable</string>
+    <string name="texto_guardar">Guardar</string>
+    <string name="texto_cerrar">Cerrar</string>
+    <string name="texto_cargando_datos">Cargando datos...</string>
+    <string name="texto_visita_guardada">Visita guardada</string>
+    <string name="texto_error_al_guardar_la_visita">Error al guardar la visita</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Esfinge</string>
+    <string name="a_adir_nuevo_marcador">Add new marker</string>
+    <string name="texto_lugar">Location</string>
+    <string name="texto_motivo">Reason</string>
+    <string name="texto_responsable">Owner</string>
+    <string name="texto_guardar">Save</string>
+    <string name="texto_cerrar">Close</string>
+    <string name="texto_cargando_datos">Loading data…</string>
+    <string name="texto_visita_guardada">Location saved</string>
+    <string name="texto_error_al_guardar_la_visita">Failed to save</string>
+</resources>

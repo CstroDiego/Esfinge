@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:labelFor="@+id/etLugar"
-            android:text="Lugar" />
+            android:text="@string/texto_lugar" />
 
         <EditText
             android:id="@+id/etLugar"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
 
             android:labelFor="@+id/etNombre"
-            android:text="Motivo" />
+            android:text="@string/texto_motivo" />
 
         <EditText
             android:id="@+id/etMotivo"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
 
             android:labelFor="@+id/etResponsable"
-            android:text="Responsable" />
+            android:text="@string/texto_responsable" />
 
         <EditText
             android:id="@+id/etResponsable"
@@ -87,7 +87,7 @@
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar"/>
+            android:text="@string/texto_guardar"/>
     </LinearLayout>
 
 </LinearLayout>

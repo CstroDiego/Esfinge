@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         // Obtener el id de la visita del marcador
         val visitaId = marker.tag as? Int
         if (visitaId != null) {
-            Toast.makeText(this, "Cargando datos...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.texto_cargando_datos), Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, ListVisitaActivity::class.java)
             intent.putExtra("visitaId", visitaId)
             startActivity(intent)
